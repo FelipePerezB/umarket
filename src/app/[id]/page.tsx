@@ -35,12 +35,11 @@ export default async function ProductPage({
   };
   const products = data?.products;
 
-
   return (
     <>
       <article className="flex flex-col gap-5 justify-center max-w-xl w-full mx-auto">
         <Slider
-          slides={product.images.map((image) => ({ url: image, alt: "A" }))}
+          slides={product.images?.map((image) => ({ url: image, alt: "A" }))}
         />
         <section>
           <div className="flex justify-between items-center">
@@ -81,8 +80,8 @@ export default async function ProductPage({
             Otros productos de Felipe Pérez
           </h2>
           <div className="flex gap-5 overflow-x-auto w-full py-2">
-            {products.map((product) => (
-              <Product {...{ ...product }} />
+            {products?.map((product) => (
+              <Product key={"product-" + product.id} {...{ ...product }} />
             ))}
           </div>
         </section>

@@ -40,7 +40,7 @@ const Announcement = ({
   );
 };
 
-export default async function () {
+export default async function AnnouncementPage() {
   const url = "https://dummyjson.com/products";
   const result = await fetch(url);
   const data = (await result.json()) as {
@@ -60,8 +60,9 @@ export default async function () {
         options={[{ opt: "Productos", url: "/" }, { opt: "Anuncios" }]}
       />
       <ItemsGrid className="py-3" size="lg">
-        {products.map(({ images }) => (
+        {products?.map(({ images, id }, i) => (
           <Announcement
+            key={"product-" + id}
             images={images}
             title="Busco camisa de futbol"
             description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi maiores dolorem deserunt cum eum possimus vero dolore, aperiam, facere nobis provident consequuntur? Aperiam fugit in hic quas quaerat id repudiandae. Similique explicabo repellendus eos iure quis cupiditate, iusto nesciunt provident fugit sunt minima hic magni a aut saepe esse, perspiciatis quia aspernatur facere! Reprehenderit aliquid, perferendis velit eaque officiis labore. Tenetur ab iure praesentium enim, illo mollitia saepe non exercitationem inventore ullam neque"

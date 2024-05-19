@@ -31,10 +31,7 @@ export default async function Home({
     cache: "no-cache",
   });
 
-
-
   const realProducts = res.rows as ProductType[];
-
 
   return (
     <>
@@ -67,6 +64,7 @@ export default async function Home({
       <ItemsGrid>
         {products?.map((product, i) => (
           <Product
+            key={product.id}
             {...{
               ...product,
               title: (realProducts[i]?.at(1) as string) ?? products[i].title,

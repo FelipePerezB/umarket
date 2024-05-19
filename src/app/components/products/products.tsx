@@ -19,9 +19,7 @@ export default async function Products() {
     <>
       <ItemsGrid>
         {products?.map((product, i) => {
-          return (
-            <Product {...{...product}} />
-          );
+          return <Product key={"product-" + product.id} {...{ ...product }} />;
         })}
       </ItemsGrid>
     </>

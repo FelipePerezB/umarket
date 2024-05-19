@@ -31,7 +31,8 @@ const Slider = ({ slides }: { slides: { url: string; alt: string }[] }) => {
         >
           {slides.map((slide, index) => (
             <img
-            loading="lazy"
+              id={`slide-${index}`}
+              loading="lazy"
               key={index}
               src={slide.url}
               alt={slide.alt}
@@ -48,7 +49,7 @@ const Slider = ({ slides }: { slides: { url: string; alt: string }[] }) => {
           &#10094;
         </button>
       )}
-      {(currentIndex < slides.length - 1) && (
+      {currentIndex < slides.length - 1 && (
         <button
           onClick={nextSlide}
           className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-gray-800 bg-opacity-50 text-white rounded-full"

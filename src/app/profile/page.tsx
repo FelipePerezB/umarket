@@ -72,7 +72,7 @@ export default async function ProfilePage({
         />
         <ItemsGrid className="pt-5">
           {products?.map((product, i) => (
-            <div className="relative group">
+            <div key={"product-" + product.id} className="relative group">
               <Link
                 href={`?modal=post&opt=product&id=${product?.id}`}
                 className="absolute top-5 right-5 p-2 z-30 bg-white rounded-full cursor-pointer hover:bg-blue-500 hover:text-white hover:scale-110 transition-all duration-200"
