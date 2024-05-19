@@ -10,8 +10,7 @@ export default async function api(
         tags,
       },
     });
-  
-    console.log(res)
+
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }

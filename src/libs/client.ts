@@ -2,8 +2,7 @@ import { createClient } from "@libsql/client";
 
 const client = createClient({
   fetch: (params: RequestInfo) => {
-    console.log("tags");
-    return fetch(params, { cache: "no-cache" });
+    return fetch(params, { cache: "no-store" });
   },
   url: process.env.TURSO_DATABASE_URL ?? "",
   authToken: process.env.TURSO_AUTH_TOKEN,

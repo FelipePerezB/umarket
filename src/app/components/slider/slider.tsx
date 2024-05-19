@@ -12,13 +12,13 @@ const Slider = ({ slides }: { slides: { url: string; alt: string }[] }) => {
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+      prevIndex === slides?.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+      prevIndex === 0 ? slides?.length - 1 : prevIndex - 1
     );
   };
 
@@ -29,7 +29,7 @@ const Slider = ({ slides }: { slides: { url: string; alt: string }[] }) => {
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {slides.map((slide, index) => (
+          {slides?.map((slide, index) => (
             <img
               id={`slide-${index}`}
               loading="lazy"
@@ -49,7 +49,7 @@ const Slider = ({ slides }: { slides: { url: string; alt: string }[] }) => {
           &#10094;
         </button>
       )}
-      {currentIndex < slides.length - 1 && (
+      {currentIndex < slides?.length - 1 && (
         <button
           onClick={nextSlide}
           className="absolute top-1/2 right-0 transform -translate-y-1/2 p-2 bg-gray-800 bg-opacity-50 text-white rounded-full"

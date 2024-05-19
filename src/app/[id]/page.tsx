@@ -10,7 +10,6 @@ export default async function ProductPage({
 }: {
   params: { id: string };
 }) {
-  console.log(id);
   const url = "https://dummyjson.com/products/" + id;
   const result = await fetch(url);
   const product = (await result.json()) as {

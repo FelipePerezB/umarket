@@ -28,7 +28,7 @@ export default async function Home({
 
   const { data: res } = await api("products", {
     next: { tags: ["products"] },
-    cache: "no-cache",
+    // cache: "no-store"
   });
 
   const realProducts = res.rows as ProductType[];

@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={GeistSans.className + "relative flex-col flex items-center"}>
         <Navbar />
         <main className="flex flex-col gap-4 w-full max-w-5xl p-4">

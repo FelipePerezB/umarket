@@ -1,7 +1,7 @@
 import Icon from "@/components/ui/icons/sm";
 import client from "@/libs/client";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import UpdateBtn from "./delete-btn";
 
 export default function UpdateForm({
@@ -32,7 +32,6 @@ export default function UpdateForm({
     WHERE
         id = ${searchParams?.id};`;
 
-    console.log(formData);
     if (optIsProduct) {
       const res = await client.execute(command);
       // await client.execute(`INSERT INTO products (title, price, description, active, author_id)
@@ -47,6 +46,7 @@ export default function UpdateForm({
       revalidateTag("announcements");
     }
     revalidateTag("products");
+    revalidatePath("/");
   };
   return (
     <form className="flex flex-col gap-2" action={createProduct}>
@@ -80,10 +80,10 @@ export default function UpdateForm({
         Imagenes
         <input type="file" />
       </label>
-      {/* <button className="flex items-center gap-2 w-max py-1 px-4 bg-black mt-3 text-white rounded-md hover:scale-95 hover:text-gray-200 transition-all duration-75 active:text-gray-400">
+      <button className="flex items-center gap-2 w-max py-1 px-4 bg-black mt-3 text-white rounded-md hover:scale-95 hover:text-gray-200 transition-all duration-75 active:text-gray-400">
         {type === "create" ? "Publicar" : "Actualizar"}
         <UpdateBtn />
-      </button> */}
+      </button>
     </form>
   );
 }
