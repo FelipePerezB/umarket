@@ -1,0 +1,14 @@
+@keyframes move-and-fade-background {
+  from {
+    opacity: 1;
+    transform: translate(0%, 0%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0%, 100%);
+  }
+}
+
+/* .bg:hover { */
+  /* transform: rotate(12deg) translate() */
+/* } */
