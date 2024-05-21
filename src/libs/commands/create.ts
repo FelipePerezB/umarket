@@ -8,9 +8,10 @@ export default async function create({
   table: string;
   attrs: { [key: string]: unknown };
 }) {
-  const command = `INSERT INTO ${table} (${Object.keys(attrs).map(format).join(
+  const filteredAttrs = Object.fromEntries(Object.entries(attrs).filter(([key, value])=>value))
+  const command = `INSERT INTO ${table} (${Object.keys(filteredAttrs).map(format).join(
     ", "
-  )}) VALUES (${Object.values(attrs).map(format).join(", ")})`;
+  )}) VALUES (${Object.values(filteredAttrs).map(format).join(", ")})`;
 
   console.log(command)
   return client.execute(command);

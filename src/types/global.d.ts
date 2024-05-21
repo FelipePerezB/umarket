@@ -1,10 +1,12 @@
+import { Role } from "@/models/role";
+
 export {};
 
-export type Roles = "admin" | "moderator" | "authorized" | "user";
+
 declare global {
   interface CustomJwtSessionClaims {
     metadata: {
-      role?: Roles;
+      role?: Role;
     };
   }
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import Icon from "../icons/sm";
 import ReediectToSignInBtn from "@/components/auth/redirect-to-signin";
+import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
 export default function Nabvar() {
   return (
@@ -36,7 +37,10 @@ export default function Nabvar() {
 
           </ReediectToSignInBtn>
         </div>
+        <SignOutButton/>
+        <SignInButton/>
       </nav>
+
       <div
         className={
           styles.gradient +

@@ -7,7 +7,8 @@ export default async function update({
   table: string;
   attrs: { [key: string]: unknown };
 }) {
-  const command = `UPDATE ${table} SET ${Object.entries(attrs)
+  const filteredAttrs = Object.fromEntries(Object.entries(attrs).filter(([key, value])=>value))
+  const command = `UPDATE ${table} SET ${Object.entries(filteredAttrs)
     .filter(([key, value]) => key.toLowerCase() !== "id")
     .map(
       ([key, value]) =>
