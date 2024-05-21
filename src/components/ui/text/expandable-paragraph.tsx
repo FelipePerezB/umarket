@@ -1,15 +1,25 @@
 "use client";
 
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Icon from "../icons/sm";
 
-export default function ExpandableParagraph({ children }: { children: ReactNode }) {
+export default function ExpandableParagraph({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const parragraphRef = useRef<HTMLDivElement>(null);
   const initialMaxParragraphHeigh = 144;
   const [maxParragraphHeigh, setMaxParragraphHeigh] = useState<string | number>(
     initialMaxParragraphHeigh
   );
+  const [parragraphHeigh, setParragraphHeigh] = useState<number | undefined>(0)
+  useEffect(()=>{
+    setParragraphHeigh(parragraphRef.current?.clientHeight)
+  }, [])
+
+  // const parragraphHeigh = parragraphRef.current?.clientHeight;
 
   return (
     <div>
@@ -29,17 +39,19 @@ export default function ExpandableParagraph({ children }: { children: ReactNode 
         }
         className="text-blue-400 hover:text-blue-700 cursor-pointer"
       >
-        <div className="flex items-center gap-1.5 mt-2">
-          {initialMaxParragraphHeigh === maxParragraphHeigh ? (
-            <>
-              Ver más <Icon icon={faChevronDown} />
-            </>
-          ) : (
-            <>
-              Ver menos <Icon icon={faChevronUp} />
-            </>
-          )}
-        </div>
+        {!!parragraphHeigh && parragraphHeigh > initialMaxParragraphHeigh && (
+          <div className="flex items-center gap-1.5 mt-2">
+            {initialMaxParragraphHeigh === maxParragraphHeigh ? (
+              <>
+                Ver más <Icon icon={faChevronDown} />
+              </>
+            ) : (
+              <>
+                Ver menos <Icon icon={faChevronUp} />
+              </>
+            )}
+          </div>
+        )}
       </span>
     </div>
   );

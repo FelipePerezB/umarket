@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Navbar from "@/components/ui/navbar/navbar";
+import { Toaster } from "react-hot-toast";
+import UpdateModal from "./components/updateForm/update-modal";
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
 
 // const inter = G({ subsets: ["latin"] });
 
@@ -16,13 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={GeistSans.className + "relative flex-col flex items-center"}>
-        <Navbar />
-        <main className="flex flex-col gap-4 w-full max-w-5xl p-4">
-          {children}
+    <ClerkProvider>
+
+      <html lang="es">
+        <body
+          className={GeistSans.className + "relative flex-col flex items-center"}
+        >
+          <Navbar />
+          <main className="flex flex-col gap-4 w-full max-w-5xl p-4">
+            {children}
+            <Toaster />
+            <UpdateModal />
           </main>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

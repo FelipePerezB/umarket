@@ -3,7 +3,7 @@ import Icon from "@/components/ui/icons/sm";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useFormStatus } from "react-dom";
 
-export default function DeleteBtn() {
+export default function UpdateBtn() {
   const { pending } = useFormStatus();
-  return !pending ? <button className="text-red-500">Eliminar</button> : <Icon icon={faPaperPlane} />;
+  return pending ? <span>p</span> : <Icon icon={faPaperPlane} />;
 }

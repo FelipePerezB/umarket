@@ -4,7 +4,8 @@ import Product from "./components/product/product";
 import SearchModal from "@/components/ui/modal/search-modal";
 import api from "@/libs/api";
 import UpdateForm from "./components/updateForm/updateForm";
-import { ProductType } from "@/models/product";
+import client from "@/libs/client";
+import getImageUrl from "@/libs/getImgUrl";
 
 export default async function Home({
   searchParams,
@@ -12,26 +13,9 @@ export default async function Home({
   searchParams: { [key: string]: string };
 }) {
   const opt = searchParams?.opt ?? ("product" as "product" | "announcement");
-
-  const url = "https://dummyjson.com/products";
-  const result = await fetch(url);
-  const data = (await result.json()) as {
-    products: {
-      id: number;
-      title: string;
-      price: number;
-      thumbnail: string;
-      images: string[];
-    }[];
-  };
-  const products = data?.products;
-
-  const { data: res } = await api("products", {
-    next: { tags: ["products"] },
-    // cache: "no-store"
-  });
-
-  const realProducts = res.rows as ProductType[];
+  const { data: res } = await api("products", { cache: "no-store" }, ["products"]);
+  console.log(res)
+  const rows = res as unknown as { ID: number, title: string, "author_id": number, price: number, images: string }[]
 
   return (
     <>
@@ -62,14 +46,13 @@ export default async function Home({
         ]}
       />
       <ItemsGrid>
-        {products?.map((product, i) => (
+        {rows?.map(({ ID, title, author_id, price, images }, i) => (
           <Product
-            key={product.id}
-            {...{
-              ...product,
-              title: (realProducts[i]?.at(1) as string) ?? products[i].title,
-              price: (realProducts[i]?.at(6) as number) ?? products[i].price,
-            }}
+            key={ID}
+            id={ID} 
+            title={title} 
+            price={price}
+            images={images?.split(',')?.map(getImageUrl)}
           />
         ))}
       </ItemsGrid>
